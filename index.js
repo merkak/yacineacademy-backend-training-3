@@ -13,6 +13,7 @@ app.set("view engine", "ejs");
 
 app.use('/user', userRouter);
 
+
 app.use(express.static("public"));
 
 app.listen(3000, () => {
