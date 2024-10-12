@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Users</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+<script>
+    fetch('/user')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.querySelector('tbody');
+            data.forEach(user => {
+                const tr = document.createElement('tr');
+                const tdNom = document.createElement('td');
+                tdNom.textContent = user.nom;
+                const tdPrenom = document.createElement('td');
+                tdPrenom.textContent = user.prenom;
+                const tdEmail = document.createElement('td');
+                tdEmail.textContent = user.email;
+                tr.appendChild(tdNom);
+                tr.appendChild(tdPrenom);
+                tr.appendChild(tdEmail);
+                tbody.appendChild(tr);
+            });
+        });
+</script>
+
+</html>
